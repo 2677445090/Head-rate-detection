@@ -16,7 +16,7 @@ root = tk.Tk()
 root.title('欢迎进入北邮抬头率检测系统！')
 root.geometry('600x420')
 #增加背景图片
-img = Image.open(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\bupt.jpg")
+img = Image.open(r"C:/Users/王铭炜/Desktop/Head Rate Detection/bupt.jpg")
 img2 = img.resize((600, 420), Image.ANTIALIAS)
 photo = ImageTk.PhotoImage(img2)
 
@@ -32,10 +32,10 @@ theLabel.place(x=0,y=0)
 def facedetec():
     cv2.namedWindow("test")#1调用摄像头
     cap=cv2.VideoCapture(0)#2人脸识别器分类器
-    classfier=cv2.CascadeClassifier(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\haarcascade_frontalface_default.xml")
+    classfier=cv2.CascadeClassifier(r"C:/Users/王铭炜/Desktop/Head Rate Detection/haarcascade_frontalface_default.xml")
     color=(0,255,0)
-    facerec = dlib.face_recognition_model_v1(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\dlib_face_recognition_resnet_model_v1.dat")
-    sp = dlib.shape_predictor(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\shape_predictor_68_face_landmarks.dat")#加载检测器
+    facerec = dlib.face_recognition_model_v1(r"C:/Users/王铭炜/Desktop/Head Rate Detection/dlib_face_recognition_resnet_model_v1.dat")
+    sp = dlib.shape_predictor(r"C:/Users/王铭炜/Desktop/Head Rate Detection/shape_predictor_68_face_landmarks.dat")#加载检测器
     detector = dlib.get_frontal_face_detector()
     while cap.isOpened():
         ok,frame=cap.read()
@@ -54,8 +54,8 @@ def facedetec():
         if cv2.waitKey(10)&0xFF==ord('a'):#输入a截取图片并检测
             cap.release()
 
-            cv2.imwrite(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\faces\test.jpg", frame)#保存获取图片
-            img = io.imread(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\faces\first.jpg")#加载检测的图片
+            cv2.imwrite(r"C:/Users/王铭炜/Desktop/Head Rate Detection/faces/test.jpg", frame)#保存获取图片
+            img = io.imread(r"C:/Users/王铭炜/Desktop/Head Rate Detection/faces/first.jpg")#加载检测的图片
             print("ok")
             detss = detector(img,1)# 图片人脸子描述
             if (len(detss) > 0):#大于0则检测到人脸
@@ -65,7 +65,7 @@ def facedetec():
                 face_descriptor = facerec.compute_face_descriptor(img, shape)
                 v = numpy.array(face_descriptor) #本地图片子描述存进v
                 print("ok2")
-                img = io.imread(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\faces\test.jpg")
+                img = io.imread(r"C:/Users/王铭炜/Desktop/Head Rate Detection/faces/test.jpg")
                 dets = detector(img, 1)# 获取图片人脸子描述
                 for k, d in enumerate(dets):
                     shape = sp(img, d)
@@ -88,7 +88,7 @@ def get_in():
     window.geometry('600x400')
 
     def read_data():
-        path = r'C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\pyexcel.xls'
+        path = r'C:/Users/王铭炜/Desktop/Head Rate Detection/pyexcel.xls'
 
         # 打开文件
         data = xlrd.open_workbook(path)
@@ -151,7 +151,7 @@ def get_in():
 
     pic_tip = tk.Label(window, text="所选教室时实图像", width=16, height=2, font=("黑体", 12)).grid(column=1, row=2, sticky='s')
 
-    img = r'C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\faces\start.jpg'##初始化图片界面
+    img = r'C:/Users/王铭炜/Desktop/Head Rate Detection/faces/start.jpg'##初始化图片界面
     img_open = Image.open(img)
     # 显示图片的代码
     (x, y) = img_open.size  # read image size
@@ -176,7 +176,7 @@ def get_in():
             nonlocal face
             str1 = "教室"
             str2 = "课上的抬头率为："
-            path = r'C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\faces'
+            path = r'C:/Users/王铭炜/Desktop/Head Rate Detection/faces'
             pic_path = str(class_room_chosen.get()) + str(course_time_chosen.get()) + '.jpg'
             p = path + '/' + pic_path
             img = cv2.imread(p)
@@ -185,9 +185,9 @@ def get_in():
             grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
             classfier = cv2.CascadeClassifier(
-                r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\haarcascade_frontalface_alt2.xml")
+                r"C:/Users/王铭炜/Desktop/Head Rate Detection/haarcascade_frontalface_alt2.xml")
             eye_cascade=cv2.CascadeClassifier(
-                r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\haarcascade_eye.xml")
+                r"C:/Users/王铭炜/Desktop/Head Rate Detection/haarcascade_eye.xml")
             faceRects = classfier.detectMultiScale(grey, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
 
             a = len(faceRects)
@@ -195,7 +195,7 @@ def get_in():
             str3 = str(a)
 
         inspect()
-        path = r'C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\pyexcel.xls'
+        path = r'C:/Users/王铭炜/Desktop/Head Rate Detection/pyexcel.xls'
         data = xlrd.open_workbook(path)
         sheet1 = data.sheet_by_name('Sheet1')
         nrows = sheet1.nrows  # 行
@@ -217,7 +217,7 @@ def get_in():
     def paishe():
         cap = cv2.VideoCapture(0)
         ret, img = cap.read()
-        cv2.imwrite(r"C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\faces\classroomnow.jpg",
+        cv2.imwrite(r"C:/Users/王铭炜/Desktop/Head Rate Detection/faces/classroomnow.jpg",
                     img)  # 此处填写摄像头拍摄的照片的存储路径
         cv2.waitKey(0)
         # 释放摄像头资源
@@ -250,10 +250,10 @@ def get_in():
             if t1 == "classroom" and t2 == "now":
                 paishe()
             pic_path = str(t1) + str(t2) + '.jpg'
-            img = os.path.join(r'C:\Users\19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\faces', pic_path) #图片的命名需按规则来命名，具体规则可参考示例图片名称
+            img = os.path.join(r'C:/Users/王铭炜/Desktop/Head Rate Detection/faces', pic_path) #图片的命名需按规则来命名，具体规则可参考示例图片名称
             img_open =imgdetector(img,
-                          'C:/Users/19022\Desktop\TaiTouLv_Jiance\TaiTouLv_Jiance\haarcascade_frontalface_alt2.xml',
-                          'C:/Users/19022/Downloads/haarcascade_eye.xml',
+                          'C:/Users/王铭炜/Desktop/Head Rate Detection/haarcascade_frontalface_alt2.xml',
+                          'C:/Users/王铭炜/Desktop/Head Rate Detection/haarcascade_eye.xml',
                           True)
             img_open = cv2.cvtColor(img_open, cv2.COLOR_BGR2RGB)
             img_open = Image.fromarray(img_open)
